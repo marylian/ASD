@@ -1,0 +1,382 @@
+
+<!--Marylia Nieves
+	MIU 1211
+	Project 4-->
+
+<html lang="en">
+
+
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="A web app that helps busy teachers keep track of their weekly tasks" />
+		<title>Weekly Teacher Tasks</title>
+		
+		<!--  Mobile viewport optimized: j.mp/bplateviewport -->
+		<meta name="HandheldFriendly" content="True">
+		<meta name="MobileOptimized" content="320"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- Mobile IE needs ClearType for smoothing fonts -->
+		<meta http-equiv="cleartype" content="on">
+		<!-- StyleSheets under here -->
+		<!--<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />-->
+		<link rel="stylesheet" href="css/themes/theme2.css"/>
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile.structure-1.2.0.min.css" />
+		<!--		<link rel="stylesheet" href="css/style.css"/>	
+		<!-- JavaScript is normally at the end of the body, except for Modernizr which enables HTML5 elements & feature detects -->
+		<script src="js/libs/modernizr.custom.min.js"></script>
+		<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+		
+		<script type="text/javascript" src="js/Sample-main.js"></script>
+		<script type="text/javascript" src="js/json.js"></script>
+	</head>
+	<body>
+		
+<!--Index page-->
+		
+		<div data-role="page" id="home">
+			<div data-role="header" data-position="fixed" data-theme="c">
+				<img src="images/wtt.gif" width="60" height="50" vspace="5" align="center">
+				Weekly Teacher Tasks
+			</div> <!--Closing header div-->
+		<!--Feature/CTA-->
+			<div data-theme="a">
+				<a href="#additem"><img height="180" width="320" src="images/ID-10092376.jpg"></a>
+			</div> <!--Closing data-theme div-->
+		<!--Search-->	
+			<div data-role="content" data-theme="a">
+				<ul data-role="listview" data-inset="true" data-filter="true">
+		
+		<!--Browse Categories-->
+					<li data-role="list-divider" >Browse Categories</li>
+					<!--Grade Papers-->
+						<li><a href="#grade">
+							<img src="images/ID-10094072.gif">
+							<h3>Grade Papers</h3>
+							<p>Check for student understanding.</p>
+					</a></li>
+					
+					<!--Contact Parents-->
+					<li><a href="#error" data-ajax="false">
+						<img src="images/ID-10060589.gif">
+							<h3>Contact Parents</h3>
+							<p>Discuss upcoming events, questions and student progress.</p>
+					</a></li>
+					
+					<!--Attend Meetings-->
+					<li><a href="#error" data-ajax="false">
+						<img src="images/ID-10081695.gif">
+							<h3>Attend Meetings</h3>
+							<p>Keep track of all the meetings you need to attend.</p>
+					</a></li>
+					
+					<!--Write Lesson Plans-->
+					<li><a href="#error" data-ajax="false">
+						<img src="images/ID-10040554.gif">
+							<h3>Write Lesson Plans</h3>
+							<p>Write your lesson plans or jot down ideas for lessons.</p>
+					</a></li>
+					<li data-role="list-divider">Let's get creative</li>
+					
+					<!--Create Test-->
+					<li><a href="#error" >
+						<img src="images/ID-10082342.gif">
+							<h3>Create a Test</h3>
+							<p>Create assessments or worksheets.</p>
+					</a></li>
+					
+					<!--Create Project-->
+					<li><a href="#error" data-ajax="false">
+						<img src="images/ID-10062043.gif"><h3>Create a Project</h3>
+						<p>Implement project ideas for students.</p>
+					</a></li>
+				</ul>
+			</div> <!--Closing content div-->
+			<div data-role="footer" data-position="fixed" data-theme="b">
+				<div data-role="navbar">
+					<ul>
+						<li><a href="#home" data-icon="home">Home</a></li>
+						<li><a href="../Bronze/index.html" data-ajax="false" data-icon="star">Bronze App</a></li>
+						<li><a href="#about" data-icon="check">About Page</a></li>
+						<li><a href="#additem" data-icon="plus">Add a Task</a></li>
+					</ul>
+				</div> <!--Closing navbar div-->
+			</div> <!--Closing footer div-->
+		</div> <!--Closing page div-->
+
+
+<!--Add Task page-->
+	
+		<div data-role="page" id="additem" data-add-back-btn="true" data-theme="a">
+			<div data-role="header" data-position="fixed" data-theme="a">
+				<img width="60" height="50" vspace="5" src="images/wtt.gif" align="center">
+				Create Task
+			</div> <!--Closing header div-->
+			<div data-role="fieldcontain" id="showData">
+				<div data-role="button" id="clearTask" data-inline="true" data-icon="delete" data-iconpos="right" data-theme="e">Clear Tasks</div>
+				<div data-role="button" id="displayTask" data-inline="true" data-icon="star" data-iconpos="right" data-theme="e">Display Tasks</div>
+			</div> <!--Closing fieldcontain div-->
+			<div data-role="content" data-theme="a">
+				<form action="" method="" id="taskForm" name="taskForm">
+					<fieldset data-role="controlgroup" data-mini="true">
+						<legend>Add a Task</legend>
+						<li><span class="required"><span>* </span>Required Fields</span></li>
+						<ul	id="errors"></ul>
+						<ul id="questions"></ul>
+						<ul>
+							<li>Days of the week:<p>
+								<ul>
+									<li><input	name="weekday" type="radio" checked="true" value="Monday" id="monday"/><label for="monday">Monday</label></li>
+									<li><input	name="weekday" type="radio" value="Tuesday" id="tuesday"/><label for="tuesday">Tuesday</label></li>
+									<li><input	name="weekday" type="radio" value="Wednesday" id="wednesday"/><label for="wednesday">Wednesday</label></li>
+									<li><input	name="weekday" type="radio" value="Thursday" id="thursday"/><label for="thursday">Thursday</label></li>
+									<li><input	name="weekday" type="radio" value="Friday" id="friday"/><label for="friday">Friday</label></li></p>
+									<i>Please select any one.</i>
+								</ul>
+							</li>
+						</ul>
+					</fieldset> <!--Closing fieldset tag-->
+					<div data-role="fieldcontain" data-theme="a">
+						<ul>
+							<fieldset data-role="controlgroup" data-mini="true">
+								<li>
+									<label for="sub">* Subject:</label><ul><input type="text" name="sub" id="sub" class="required" placeholder="Eg: Math"/></ul>
+										<ul>
+												<font size="2"><i>Subject Name</i></font>
+										</ul>
+									<label for="period">* Period:</label><ul><input type="text" id="period" class="required" placeholder="Eg: 2, 3..."/></ul>
+										<ul><font size="2"><i>Period Number</i></font></ul>								
+								</li>							
+							</fieldset>
+						</ul>
+					</div> <!--Closing fieldcontain div-->
+					<div data-role="fieldcontain" data-theme="a">
+						<ul>
+							Grade Level:<ul><input type="range" name="range1" min="0" max="12" step="1" value="6" id="grade"/></ul>
+						</ul>
+					</div> <!--Closing fieldcontain div-->
+					<div data role="fieldcontain" data-theme="a">
+						<ul>
+							<label for="categories">Task Categories:</label>
+							<ul><name="categories" id="categories" data-inline="true" data-native-menu="false"></ul>
+						</ul>
+					</div> <!--Closing fieldcontain div-->
+					<div data-role="fieldcontain" data-theme="a">
+						<ul>
+							<fieldset data-role="controlgroup" data-mini="true">
+								<label for="dueDate">Due Date:</label><ul><input type="date" id="dueDate" class="required" name="Due Date" placeholder="MM/DD/YYYY"/></ul>
+							</fieldset>
+						</ul>	
+					</div> <!--Closing controlgroup div-->
+					<div data-role="fieldcontain" data-theme="a">
+						<ul>
+							<fieldset data-role="controlgroup" data-mini="true">
+								<label for="comments">My Notes:</label><ul><textarea id="comments" placeholder="Additional Notes"></textarea></ul>
+							</fieldset>
+						</ul>
+					</div> <!--Closing fieldcontain div-->
+					<input type="submit" id="taskSubmit" name="taskSubmit" data-inline="true" value="Submit" data-icon="check" data-theme="b"/>
+					<!--<a href="#home" data-inline="true" id="taskSubmit" data-role="button" data-theme="b" data-icon="check"/>Submit</a>-->
+					<a href="#home" data-inline="true" data-role="button" data-theme="w" data-icon="delete">Cancel</a>
+				</form> <!--Closing form tag-->
+			</div> <!--Closing content div-->
+			<div id="itemList" data-role="fieldcontain" data-theme="a"></div> <!--Closing fieldcontain div-->
+			<div data-role="footer" data-position="fixed" data-theme="b">
+				<div data-role="navbar">
+					<ul>
+						<li><a href="#home" data-icon="home">Home</a></li>
+						<li><a href="../Bronze/index.html" data-ajax="false" data-icon="star">Bronze App</a></li>
+						<li><a href="#about" data-icon="check">About Page</a></li>
+						<li><a href="#additem" data-icon="plus">Add a Task</a></li>
+					</ul>
+				</div><!--Closing navbar div-->
+			</div> <!--Closing footer div-->
+			<script type="text/javascript" src="js/Sample-main.js"></script>
+		</div> <!--Closing page div-->
+	
+	
+<!--Add Task page-->		
+		
+		<div data-role="page" id="about" data-add-back-btn="true" data-theme="a">
+			<div data-role="header" data-position="fixed" data-theme="a">
+				<img width="60" height="50" vspace="5" src="images/wtt.gif" align="center">
+				About The App
+			</div> <!--Closing header div-->
+			<h1>Weekly Teacher Tasks</h1>
+			<h3>About Page </h3>
+			<div>
+				<li>
+					<ul>
+						About Page:
+						<br>Weekly Teacher Tasks is an app that helps teachers manage their daily to-do list. The main goal is to have teachers organize theirs task in to various categories and to help manage their time more effectively. I believe time and learning to manage time is essential to all educators across the globe. 
+					</ul>
+		    	</li>
+			</div>
+			<p>
+				<div>
+					<li>
+						<ul>
+							Meet the developer:
+							<br>My name is Marylia Nieves-Patel I am an Elementary School Teacher in Orlando FL. who is also currently seeking a degree in Mobile Development at Full Sail University Online. I started my degree in Mobile Development in January 2012.
+						</ul>
+					</li>
+				</div>
+			</p>
+			<p>
+			<div>
+				<li>
+					<ul>
+						Marylia Nieves-Patel
+						<br>1234 Amherst Dr. 
+						<br>Orlando, FL 32829
+						<br>407-555-5555
+						<br>m.nieves@gmail.com
+					</ul>
+				</li>
+			</div>
+			</p>
+			<div>
+				<h3>GitHub links:</h3>
+			</div>
+			<div>
+				<li>
+					<ul>
+						<h4>Gold App</h4>
+						<a href="http://marylian.github.com/MIU-Week-2/Gold/index.html">
+							http://marylian.github.com/MIU-Week-2/Gold/index.html
+						</a>
+					</ul>
+				</li>	
+			</div>
+			<div>
+				<li>
+					<ul>	
+						<h4>Bronze App</h4>
+						<a href="http://marylian.github.com/MIU-Week-2/Gold/index.html">
+							http://marylian.github.com/MIU-Week-2/Bronze/index.html
+						</a>
+					</ul>
+				</li>
+			</div>
+			<p>
+			<div>
+				<img height="180" width="280" src="images/nieves.jpg">
+			</div>
+			</p>
+			<div data-role="footer" data-position="fixed" data-theme="b">
+				<div data-role="navbar">
+					<ul>
+						<li><a href="#home" data-ajax="false" data-icon="home" >Home</a></li>
+						<li><a href="../Bronze/index.html" data-ajax="false" data-icon="star">Bronze App</a></li>
+						<li><a href="#about" data-ajax="false" data-icon="check">About Page</a></li>
+						<li><a href="#additem" data-ajax="false" data-icon="plus">Add a Task</a></li>
+					</ul>
+				</div> <!--Closing navbar div-->
+			</div> <!--Closing footer div-->
+		</div> <!--Closing page div-->
+	
+		
+<!--Error Page-->
+		
+		<div data-role="page" id="error" data-add-back-btn="true">
+			<div data-role="header" data-theme="a">
+				<img src="images/wtt.gif" vspace="5" width="60" height="50" align="center">
+				Error Page
+			</div> <!--Closing header div-->	
+			<img src="images/ID-10051607.jpg">
+			<div data-role="footer" data-position="fixed" data-theme="b">
+				<div data-role="navbar">
+					<ul>
+						<li><a href="#home" data-icon="home">Home</a></li>
+						<li><a href="../Bronze/index.html" data-ajax="false" data-icon="star">Bronze App</a></li>
+						<li><a href="#about" data-ajax="false" data-icon="check">About Page</a></li>
+						<li><a href="#additem" data-ajax="false" data-icon="plus">Add a Task</a></li>
+					</ul>
+				</div> <!--Closing navbar div-->
+			</div> <!--Closing footer div-->
+		</div> <!--Closing page div-->
+		
+		
+		
+		
+		<div data-role="page" id="grade" data-add-back-btn="true" data-theme="a">
+			<div data-role="header">
+				<img width="60" height="50" vspace="5" src="images/wtt.gif" align="center">
+				Grade Papers	
+			</div> <!--Closing header div-->
+			<div data-role="content">
+				<!-- data-role="listview"> -->
+				<div data-role="collapsible-set">
+					<div data-role="collapsible">
+						<h3>Subjects</h3>
+						<p>
+							<ul>
+								<li>Language Arts</li>
+								<li>Math</li>
+								<li>Reading</li>
+								<li>Science</li>
+								<li>Social Studies</li>	
+							</ul>
+						</p>
+					</div> <!--Closing Collapsible item div-->
+					<div data-role="collapsible">
+						<h3>Assignments</h3>
+						<p>
+							<ul>
+								<li>Homework</li>
+								<li>Classwork</li>
+								<li>Test</li>
+								<li>Quiz</li>
+							</ul>
+						</p>
+					</div> <!--Closing Collapsible item div-->
+					<div data-role="collapsible">
+						<h3>Level</h3>
+						<p>
+							<ul>
+								<li>Above Grade</li>
+								<li> On Grade Level</li>
+								<li>Below Grade Level</li>
+							</ul>
+						</p>
+					</div> <!--Closing Collapsible item div-->
+					<div data-role="collapsible">
+						<h3>Effort</h3>
+						<p>
+							<ul>
+								<li>Satisfactory</li>
+								<li>Needs Improvement</li>
+								<li>Unsatisfactory</li>
+							</ul>
+						</p>
+					</div> <!--Closing Collapsible item div-->
+					<div data-role="collapsible">
+						<h3>Working Habits</h3>
+						<p>
+							<ul>
+								<li>Works Independently</li>
+								<li>Needs Teacher Guidance-Occasionally</li>
+								<li>Needs Teacher Guidance-Constrantly</li>
+							</ul>
+						</p>
+					</div> <!--Closing Collapsible item div-->
+					<div data-role="footer" data-position="fixed" data-theme="b">
+						<div data-role="navbar">
+							<ul>
+								<li><a href="#home" data-icon="home">Home</a></li>
+								<li><a href="../Bronze/index.html" data-ajax="false" data-icon="star">Bronze App</a></li>
+								<li><a href="#about" data-icon="check">About Page</a></li>
+								<li><a href="#additem" data-ajax="false" data-icon="plus">Add a Task</a></li>
+							</ul>
+						</div> <!--Closing navbar div-->
+					</div> <!--Closing footer div-->
+				</div> <!--Closing Collapsible set div-->
+			</div> <!--Closing Content div-->
+		</div> <!--Closing page div-->
+	
+	
+		<!-- JavaScript under here -->
+		<script type="text/javascript" src="js/libs/jquery.validate.min.js"></script>
+	</body>
+</html>
