@@ -1,6 +1,6 @@
 //Marylia Nieves
-//Visual Frameworks(VFW) 
-//Assignment 4
+//ASD 
+//Assignment 1 Term 1212
 
 //Wait until the DOM is ready
 /*
