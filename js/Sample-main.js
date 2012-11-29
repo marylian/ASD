@@ -1,6 +1,6 @@
 //Marylia Nieves
-//ASD 
-//Assignment 1 Term 1212
+// 
+//Assignment 4
 
 //Wait until the DOM is ready
 /*
